@@ -48,7 +48,7 @@ jobs:
       - name: Debug joined messages
         env:
           joined_messages: ${{ join(github.event.commits.*.message ) }}
-        run: echo $joined_messages"
+        run: echo "$joined_messages"
       - name: Debug conditional
         env: 
           conditional: ${{ contains(join(github.event.commits.*.message), '#skip') }}
