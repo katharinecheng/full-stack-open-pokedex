@@ -45,13 +45,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           DRY_RUN: false     
-      - name: Debug
+      - name: Debug joined messages
         env:
-          CONDITIONAL1: ${{ join(github.event.commits.*.message ) }}
-          CONDITIONAL2: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-        run: 
-          echo "$CONDITIONAL1" |
-          echo "$CONDITIONAL2"
+          joined_messages: ${{ join(github.event.commits.*.message ) }}
+        run: echo $joined_Messages"
+      - name: Debug conditional
+        env: 
+          conditional: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        run: echo "$conditional"
   test_github_context:
     runs-on: ubuntu-20.04
     steps: 
